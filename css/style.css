@@ -1,4 +1,4 @@
-/* Global CSS Reset & Variables */
+/* Global CSS Reset & Theme Variables */
 :root {
     --bg-primary: #0a0e17;
     --bg-secondary: #131b2e;
@@ -31,7 +31,7 @@ body {
     line-height: 1.6;
 }
 
-/* Background Glow Effect */
+/* Background Atmospheric Glow Effect */
 .background-glow {
     position: absolute;
     top: -150px;
@@ -45,7 +45,7 @@ body {
     pointer-events: none;
 }
 
-/* Navbar */
+/* Navigation Header */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -106,14 +106,14 @@ body {
     background: var(--accent-red);
 }
 
-/* Container */
+/* Main Container Layout */
 .container {
     max-width: 1100px;
     margin: 0 auto;
     padding: 3rem 1.5rem;
 }
 
-/* Hero Section */
+/* Hero Intro Section */
 .hero-section {
     text-align: center;
     margin-bottom: 3rem;
@@ -153,7 +153,7 @@ body {
     margin: 0 auto 2.5rem auto;
 }
 
-/* Search Box */
+/* URL Input & Search Card */
 .search-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -232,7 +232,7 @@ body {
     box-shadow: 0 10px 20px rgba(255, 59, 92, 0.4);
 }
 
-/* Loader */
+/* Spinner & Loader */
 .loader-container {
     text-align: center;
     padding: 2rem;
@@ -324,7 +324,7 @@ body {
     font-size: 0.85rem;
 }
 
-/* Download Grid */
+/* Download Options Grid */
 .download-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -431,7 +431,7 @@ body {
     background: var(--accent-blue);
 }
 
-/* Features Section */
+/* Key Features Grid */
 .features-section {
     margin-top: 5rem;
     text-align: center;
@@ -459,7 +459,7 @@ body {
 }
 
 .feature-card:hover {
-    transform: translateY(-50%);
+    transform: translateY(-4px);
     border-color: rgba(255, 59, 92, 0.3);
 }
 
@@ -479,7 +479,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* Toast Notification */
+/* Toast Notifications */
 .toast {
     position: fixed;
     bottom: 30px;
@@ -500,7 +500,7 @@ body {
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* Footer */
+/* Footer Section */
 footer {
     text-align: center;
     padding: 2rem;
@@ -510,7 +510,7 @@ footer {
     margin-top: 4rem;
 }
 
-/* Responsive Design */
+/* Media Queries & Responsive Layouts */
 @media (max-width: 768px) {
     .hero-section h1 { font-size: 2rem; }
     .download-grid { grid-template-columns: 1fr; }
