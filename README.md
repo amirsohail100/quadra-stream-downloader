@@ -1,56 +1,73 @@
-# ⚡ StreamForge - YouTube Video & Audio Downloader
+# ⚡ Quadra Stream Downloader
 
-**StreamForge** is a modern, fast, and responsive web application built with HTML, CSS, and JavaScript. It allows users to effortlessly extract and download YouTube videos and audio files in multiple quality formats with a sleek dark glassmorphism user interface.
+<p align="center">
+  <b>A High-Performance YouTube Video & Audio Downloader Web Application</b>
+  <br>
+  Built and Maintained by <b>Quadra Collective</b>
+</p>
 
 ---
 
-## ✨ Features
+## 🚀 Overview
 
-- 🎥 **Video Download Options:** High (1080p Full HD), Medium (720p HD), Low (360p SD).
-- 🎵 **Audio Extraction Options:** High Quality (320 kbps), Standard (192 kbps), Compact (128 kbps).
-- 🖼️ **Live Preview:** Instant fetching of video thumbnails, titles, channel info, and view counts.
-- 🎨 **Modern UI/UX:** Responsive dark mode layout with smooth animations and toasts.
-- ⚡ **Zero Dependencies:** Pure vanilla JavaScript and modern CSS.
+**Quadra Stream Downloader** is a responsive, modern web application designed for seamlessly fetching and downloading YouTube videos and extracting high-fidelity audio streams. Engineered with a sleek dark glassmorphism interface, it provides flexible quality selections for both video and audio formats.
+
+---
+
+## ✨ Key Features
+
+- 📹 **Video Download Options:**
+  - **High:** 1080p Full HD (~120 MB)
+  - **Medium:** 720p HD (~45 MB)
+  - **Low:** 360p SD (~18 MB)
+- 🎵 **Audio / Voice Extraction Options:**
+  - **High:** 320 kbps High Quality Audio (~12 MB)
+  - **Medium:** 192 kbps Standard Audio (~7 MB)
+  - **Low:** 128 kbps Compact MP3 (~4 MB)
+- 🎨 **Modern Glassmorphism UI:** Features smooth CSS backdrop blurs, glow gradients, dynamic responsive layouts, and interactive toast feedback.
+- ⚡ **Instant URL Parsing:** Automatically fetches video thumbnails, titles, view counts, and channel metadata upon URL input.
+- 📱 **Cross-Platform Responsive Design:** Fully optimized for desktop, tablet, and mobile browsers.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **HTML5:** Semantic structure
-- **CSS3:** Custom styles, CSS variables, Glassmorphism, animations
-- **JavaScript (ES6+):** Dynamic preview fetching and download triggers
-- **FontAwesome:** Vector iconography
+- **Markup:** HTML5 (Semantic & Accessible)
+- **Styling:** CSS3 (Custom Variables, Glassmorphic Effects, Flexbox & Grid)
+- **Scripting:** JavaScript ES6+
+- **Icons & Fonts:** FontAwesome 6, Google Fonts (Plus Jakarta Sans)
 
 ---
 
-## 🚀 How to Run Locally
-
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/<your-username>/streamforge-yt-downloader.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd streamforge-yt-downloader
-   ```
-3. Open `index.html` in your favorite web browser or use Live Server.
-
----
-
-## 📂 Project Structure
+## 📂 Project Directory Structure
 
 ```text
-youtube_downloader/
-├── index.html        # Main HTML layout
+quadra-stream-downloader/
+├── index.html          # Main HTML Document & UI Layout
+├── README.md           # Project Documentation
 ├── css/
-│   └── style.css     # UI styling & glassmorphism theme
-├── js/
-│   └── script.js    # Logic for URL extraction & UI handlers
-└── README.md         # Project documentation
+│   └── style.css       # Custom Glassmorphism Stylesheet
+└── js/
+    └── script.js       # URL Parser & UI Event Handlers
 ```
 
 ---
 
-## 📜 License
+## 🔧 Getting Started
 
-This project is open-source and available under the [MIT License](LICENSE).
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/quadra-stream-downloader.git
+   ```
+2. **Navigate into the Project Folder:**
+   ```bash
+   cd quadra-stream-downloader
+   ```
+3. **Launch the Application:**
+   Open `index.html` directly in any browser or run it using a local development server (e.g., VS Code Live Server).
+
+---
+
+## 🛡️ License & Attributions
+
+Distributed under the **MIT License**. Created with excellence by **Quadra Collective**.
