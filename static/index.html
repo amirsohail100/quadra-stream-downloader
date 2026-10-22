@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadra Stream Downloader - YouTube Video & Audio Downloader</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="background-glow"></div>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-bolt logo-icon"></i>
+            <span>Quadra<span class="highlight">Stream</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#features"><i class="fa-solid fa-star"></i> Features</a>
+            <a href="#how-it-works"><i class="fa-solid fa-circle-info"></i> How It Works</a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <span class="badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Fast, Free & HD Quality</span>
+            <h1>Download YouTube Videos & Audio <br><span class="gradient-text">Seamlessly in Seconds</span></h1>
+            <p class="subtitle">Paste your YouTube video link below to download high-definition video or extract studio-quality MP3 audio.</p>
+
+            <!-- Search Input Box -->
+            <div class="search-card">
+                <form id="downloadForm" onsubmit="event.preventDefault(); processVideo();">
+                    <div class="input-group">
+                        <i class="fa-solid fa-link input-icon"></i>
+                        <input type="text" id="videoUrl" placeholder="Paste YouTube video URL here (e.g., https://youtube.com/watch?v=...)" required>
+                        <button type="button" class="clear-btn" id="clearBtn" aria-label="Clear Input"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <button type="submit" class="btn-primary" id="fetchBtn">
+                        <i class="fa-solid fa-magnifying-glass"></i> Process Video
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Loader -->
+        <div class="loader-container" id="loader" style="display: none;">
+            <div class="spinner"></div>
+            <p id="loaderText">Fetching video details from Quadra API...</p>
+        </div>
+
+        <!-- Video Preview & Options Section -->
+        <section class="result-section" id="resultSection" style="display: none;">
+            <div class="video-preview-card">
+                <div class="thumbnail-wrapper">
+                    <img id="videoThumbnail" src="" alt="YouTube Video Thumbnail">
+                    <span class="duration-badge" id="videoDuration">10:25</span>
+                </div>
+                <div class="video-info">
+                    <h2 id="videoTitle">Video Title</h2>
+                    <p class="channel-name" id="channelName"><i class="fa-solid fa-circle-check"></i> Channel Name</p>
+                    <div class="video-stats">
+                        <span><i class="fa-solid fa-eye"></i> <span id="viewCount">0</span> Views</span>
+                        <span><i class="fa-solid fa-calendar-days"></i> <span id="uploadDate">Recently</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quality Download Cards -->
+            <div class="download-grid">
+                <!-- Video Section -->
+                <div class="option-card video-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fa-solid fa-video"></i></div>
+                        <div>
+                            <h3>Video Download (MP4)</h3>
+                            <p>High, Medium, and Low resolution options</p>
+                        </div>
+                    </div>
+                    <div class="quality-list">
+                        <div class="quality-item">
+                            <div class="q-info">
+                                <span class="q-badge high">High</span>
+                                <span class="q-res">1080p Full HD</span>
+                            </div>
+                            <button class="download-btn" onclick="triggerDownload('video', '1080p')">
+                                <i class="fa-solid fa-download"></i> Download
+                            </button>
+                        </div>
+
+                        <div class="quality-item">
+                            <div class="q-info">
+                                <span class="q-badge medium">Medium</span>
+                                <span class="q-res">720p HD</span>
+                            </div>
+                            <button class="download-btn" onclick="triggerDownload('video', '720p')">
+                                <i class="fa-solid fa-download"></i> Download
+                            </button>
+                        </div>
+
+                        <div class="quality-item">
+                            <div class="q-info">
+                                <span class="q-badge low">Low</span>
+                                <span class="q-res">360p SD</span>
+                            </div>
+                            <button class="download-btn" onclick="triggerDownload('video', '360p')">
+                                <i class="fa-solid fa-download"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audio Section -->
+                <div class="option-card audio-card">
+                    <div class="card-header">
+                        <div class="card-icon audio-icon"><i class="fa-solid fa-music"></i></div>
+                        <div>
+                            <h3>Audio Download (MP3)</h3>
+                            <p>Extract voice recording and audio tracks</p>
+                        </div>
+                    </div>
+                    <div class="quality-list">
+                        <div class="quality-item">
+                            <div class="q-info">
+                                <span class="q-badge high">High</span>
+                                <span class="q-res">320 kbps (HQ Audio)</span>
+                            </div>
+                            <button class="download-btn audio-btn" onclick="triggerDownload('audio', '320kbps')">
+                                <i class="fa-solid fa-download"></i> Download
+                            </button>
+                        </div>
+
+                        <div class="quality-item">
+                            <div class="q-info">
+                                <span class="q-badge medium">Medium</span>
+                                <span class="q-res">192 kbps (Standard)</span>
+                            </div>
+                            <button class="download-btn audio-btn" onclick="triggerDownload('audio', '192kbps')">
+                                <i class="fa-solid fa-download"></i> Download
+                            </button>
+                        </div>
+
+                        <div class="quality-item">
+                            <div class="q-info">
+                                <span class="q-badge low">Low</span>
+                                <span class="q-res">128 kbps (Compact)</span>
+                            </div>
+                            <button class="download-btn audio-btn" onclick="triggerDownload('audio', '128kbps')">
+                                <i class="fa-solid fa-download"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" id="features">
+            <h2 class="section-title">Engineered for the <span class="gradient-text">Ultimate Experience</span></h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fa-solid fa-bolt feature-icon"></i>
+                    <h3>Lightning Fast</h3>
+                    <p>Process and convert videos instantly with optimal server throughput.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-sliders feature-icon"></i>
+                    <h3>Multi-Quality Support</h3>
+                    <p>Choose between High (1080p/320kbps), Medium (720p/192kbps), and Low (360p/128kbps) outputs.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-shield-halved feature-icon"></i>
+                    <h3>Secure & Free</h3>
+                    <p>No registration or signup required. Completely safe and free from intrusive popups.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Quadra Collective. All Rights Reserved. Built for Fast Media Conversions.</p>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
