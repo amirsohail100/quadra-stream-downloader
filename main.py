@@ -64,9 +64,11 @@ async def get_download_stream(req: DownloadRequest):
             format_selector = "bestaudio/best"
 
         ydl_opts = {
-            'format': format_selector,
             'quiet': True,
-            'no_warnings': True
+            'no_warnings': True,
+            'skip_download': True,
+            'extractor_args': {'youtube': {'player_client': ['android', 'web']}},
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
