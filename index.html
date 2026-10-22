@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamForge - YouTube Video & Audio Downloader</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="background-glow"></div>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-bolt logo-icon"></i>
+            <span>Stream<span class="highlight">Forge</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#features"><i class="fa-solid fa-star"></i> फ़ीचर्स</a>
+            <a href="#how-it-works"><i class="fa-solid fa-circle-info"></i> कैसे काम करता है</a>
+            <button class="theme-toggle" id="themeToggle"><i class="fa-solid fa-moon"></i></button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <span class="badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Fast, Free & HD Quality</span>
+            <h1>YouTube वीडियो और ऑडियो <br><span class="gradient-text">आसानी से डाउनलोड करें</span></h1>
+            <p class="subtitle">अपनी पसंदीदा YouTube वीडियो लिंक पेस्ट करें और HD वीडियो या HQ MP3 ऑडियो डाउनलोड करें।</p>
+
+            <!-- Search Input Box -->
+            <div class="search-card">
+                <form id="downloadForm" onsubmit="event.preventDefault(); processVideo();">
+                    <div class="input-group">
+                        <i class="fa-solid fa-link input-icon"></i>
+                        <input type="text" id="videoUrl" placeholder="यहाँ YouTube वीडियो का URL पेस्ट करें (e.g., https://youtube.com/watch?v=...)" required>
+                        <button type="button" class="clear-btn" id="clearBtn"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <button type="submit" class="btn-primary" id="fetchBtn">
+                        <i class="fa-solid fa-magnifying-glass"></i> प्रोसेस करें
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Loader -->
+        <div class="loader-container" id="loader" style="display: none;">
+            <div class="spinner"></div>
+            <p>वीडियो विवरण प्राप्त किया जा रहा है...</p>
+        </div>
+
+        <!-- Video Preview & Options Section -->
+        <section class="result-section" id="resultSection" style="display: none;">
+            <div class="video-preview-card">
+                <div class="thumbnail-wrapper">
+                    <img id="videoThumbnail" src="" alt="YouTube Video Thumbnail">
+                    <span class="duration-badge" id="videoDuration">10:25</span>
+                </div>
+                <div class="video-info">
+                    <h2 id="videoTitle">वीडियो शीर्षक यहाँ दिखेगा</h2>
+                    <p class="channel-name" id="channelName"><i class="fa-solid fa-circle-check"></i> चैनल नाम</p>
+                    <div class="video-stats">
+                        <span><i class="fa-solid fa-eye"></i> <span id="viewCount">1.2M</span> Views</span>
+                        <span><i class="fa-solid fa-calendar-days"></i> <span id="uploadDate">2 days ago</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quality Download Cards -->
+            <div class="download-grid">
+                <!-- Video Section -->
+                <div class="option-card video-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fa-solid fa-video"></i></div>
+                        <div>
+                            <h3>वीडियो डाउनलोड (Video MP4)</h3>
+                            <p>हाई, मीडियम और लो क्वालिटी विकल्प</p>
+                        </div>
+                    </div>
+                    <div class="quality-list">
+                        <div class="quality-item">
+                            <div class="q-info">
+                                <span class="q-badge high">High</span>
+                                <span class="q-res">1080p Full HD</span>
+                            </div>
+                            <span class="file-size">~ 120 MB</span>
+                            <button class="download-btn" onclick="triggerDownload('video', '1080p')">
+                                <i class="fa-solid fa-download"></i> डाउनलोड
+                            </button>
+                        </div>
+
+                        <div class="quality-item">
+                            <div class="q-info">
+                                <span class="q-badge medium">Medium</span>
+                                <span class="q-res">720p HD</span>
+                            </div>
+                            <span class="file-size">~ 45 MB</span>
+                            <button class="download-btn" onclick="triggerDownload('video', '720p')">
+                                <i class="fa-solid fa-download"></i> डाउनलोड
+                            </button>
+                        </div>
+
+                        <div class="quality-item">
+                            <div class="q-info">
+                                <span class="q-badge low">Low</span>
+                                <span class="q-res">360p SD</span>
+                            </div>
+                            <span class="file-size">~ 18 MB</span>
+                            <button class="download-btn" onclick="triggerDownload('video', '360p')">
+                                <i class="fa-solid fa-download"></i> डाउनलोड
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audio Section -->
+                <div class="option-card audio-card">
+                    <div class="card-header">
+                        <div class="card-icon audio-icon"><i class="fa-solid fa-music"></i></div>
+                        <div>
+                            <h3>ऑडियो डाउनलोड (Audio MP3)</h3>
+                            <p>वॉइस रिकॉर्डिंग / ऑडियो केवल एक्सट्रैक्ट करें</p>
+                        </div>
+                    </div>
+                    <div class="quality-list">
+                        <div class="quality-item">
+                            <div class="q-info">
+                                <span class="q-badge high">High</span>
+                                <span class="q-res">320 kbps (HQ Audio)</span>
+                            </div>
+                            <span class="file-size">~ 12 MB</span>
+                            <button class="download-btn audio-btn" onclick="triggerDownload('audio', '320kbps')">
+                                <i class="fa-solid fa-download"></i> डाउनलोड
+                            </button>
+                        </div>
+
+                        <div class="quality-item">
+                            <div class="q-info">
+                                <span class="q-badge medium">Medium</span>
+                                <span class="q-res">192 kbps (Standard)</span>
+                            </div>
+                            <span class="file-size">~ 7 MB</span>
+                            <button class="download-btn audio-btn" onclick="triggerDownload('audio', '192kbps')">
+                                <i class="fa-solid fa-download"></i> डाउनलोड
+                            </button>
+                        </div>
+
+                        <div class="quality-item">
+                            <div class="q-info">
+                                <span class="q-badge low">Low</span>
+                                <span class="q-res">128 kbps (Compact)</span>
+                            </div>
+                            <span class="file-size">~ 4 MB</span>
+                            <button class="download-btn audio-btn" onclick="triggerDownload('audio', '128kbps')">
+                                <i class="fa-solid fa-download"></i> डाउनलोड
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" id="features">
+            <h2 class="section-title">सर्वश्रेष्ठ अनुभव के लिए <span class="gradient-text">विशेषताएँ</span></h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fa-solid fa-bolt feature-icon"></i>
+                    <h3>सुपरफास्ट स्पीड</h3>
+                    <p>बिना किसी रुकावट के तेज गति से वीडियो तथा ऑडियो प्रोसेस करें।</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-sliders feature-icon"></i>
+                    <h3>मल्टीपल क्वालिटी सपोर्ट</h3>
+                    <p>High (1080p/320kbps), Medium (720p/192kbps), और Low (360p/128kbps) में एक्सट्रैक्ट करें।</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fa-solid fa-shield-halved feature-icon"></i>
+                    <h3>100% सुरक्षित एवं मुफ़्त</h3>
+                    <p>कोई साइन-अप आवश्यक नहीं, बिना किसी वायरस और विज्ञापन की झंझट के।</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 StreamForge App. Designed for Fast & HD YouTube Media Downloads.</p>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
