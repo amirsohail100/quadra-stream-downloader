@@ -70,4 +70,4 @@ quadra-stream-downloader/
 
 ## 🛡️ License & Attributions
 
-Distributed under the **MIT License**. Created with excellence by **Quadra Collective**.
+Distributed under the **MIT License**. Created with excellence by **Quadra Collective**
