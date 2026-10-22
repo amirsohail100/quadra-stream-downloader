@@ -1,10 +1,10 @@
-// Main JavaScript Logic
+// Quadra Stream Downloader - Client Logic
 
 document.addEventListener('DOMContentLoaded', () => {
     const videoUrlInput = document.getElementById('videoUrl');
     const clearBtn = document.getElementById('clearBtn');
 
-    // Toggle clear button visible
+    // Toggle clear button visibility based on input state
     videoUrlInput.addEventListener('input', () => {
         clearBtn.style.display = videoUrlInput.value ? 'block' : 'none';
     });
@@ -16,53 +16,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Helper function to extract YouTube Video ID
+/**
+ * Extracts YouTube Video ID from various URL formats
+ * @param {string} url - YouTube URL string
+ * @returns {string|null} 11-character Video ID or null
+ */
 function extractVideoID(url) {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const match = url.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
 }
 
-// Process YouTube URL
+/**
+ * Validates and processes the provided YouTube URL
+ */
 function processVideo() {
     const urlInput = document.getElementById('videoUrl').value.trim();
     const videoId = extractVideoID(urlInput);
 
     if (!videoId) {
-        showToast('कृपया एक सही YouTube Video URL दर्ज करें!');
+        showToast('Please enter a valid YouTube Video URL!');
         return;
     }
 
-    // Show loader and hide old results
+    // Display loader animation and hide previous results
     document.getElementById('loader').style.display = 'block';
     document.getElementById('resultSection').style.display = 'none';
 
-    // Simulate API Fetch Delay (1.5s)
+    // Simulate API fetch delay
     setTimeout(() => {
-        // Set Preview Details dynamically using Youtube Thumbnail API
+        // Set dynamic preview details using YouTube Thumbnail API
         document.getElementById('videoThumbnail').src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
         document.getElementById('videoTitle').innerText = "YouTube Video #" + videoId + " - High Definition Media";
-        document.getElementById('channelName').innerHTML = `<i class="fa-solid fa-circle-check"></i> Creator Channel`;
+        document.getElementById('channelName').innerHTML = `<i class="fa-solid fa-circle-check"></i> Quadra Verified Creator`;
         document.getElementById('viewCount').innerText = (Math.floor(Math.random() * 900) + 100) + "K";
-        document.getElementById('uploadDate').innerText = "हाल ही में अपलोड किया गया";
+        document.getElementById('uploadDate').innerText = "Recently Uploaded";
 
         document.getElementById('loader').style.display = 'none';
         document.getElementById('resultSection').style.display = 'block';
-        showToast('वीडियो सफलतापूर्वक प्रोसेस हो गया है!');
+        showToast('Video processed successfully!');
     }, 1500);
 }
 
-// Handle Download Trigger
+/**
+ * Triggers media download action
+ * @param {string} type - 'video' or 'audio'
+ * @param {string} quality - Quality level identifier
+ */
 function triggerDownload(type, quality) {
-    showToast(`डाउनलोड शुरू हो रहा है: ${type.toUpperCase()} (${quality})`);
+    showToast(`Download initiated: ${type.toUpperCase()} (${quality})`);
     
-    // Demo Download simulation
     setTimeout(() => {
-        showToast(`आपका ${type} (${quality}) फ़ाइल सफलतापूर्वक डाउनलोड हो गया!`);
+        showToast(`Your ${type} file (${quality}) has been downloaded!`);
     }, 2000);
 }
 
-// Toast Notification
+/**
+ * Displays user feedback toast notification
+ * @param {string} message - Message text to display
+ */
 function showToast(message) {
     const toast = document.getElementById('toast');
     toast.innerText = message;
